@@ -1,9 +1,36 @@
-function seed() {}
+function seed() {return Array.from(arguments);}
 
-function same([x, y], [j, k]) {}
+function same([x, y], [j, k]) {let a=JSON.stringify(arguments[0]); let b=JSON.stringify(arguments[1]); return (a===b);}
 
 // The game state to search for `cell` is passed as the `this` value of the function.
-function contains(cell) {}
+function contains(cell) {for(let i=0; i<this.length; i++){
+  if (same(this[i], cell)) return true;
+}}
+const printCell = (cell, state) => {if (contains.call(state, cell)){return '\u25A3'}; return '\u25A2';};
+
+const corners = (state = []) => {console.log(state);
+  if (state.length==0){ 
+    return {topRight:[0,0], bottomLeft:[0,0]};
+  }
+  else{
+    let maxX = state[0][0];
+    let maxY = state[0][1];
+    let minX = state[0][0];
+    let minY = state[0][0];
+
+    for (var i=0; i<state.length; ++i){
+      if (state[i][0] > maxX || state[i][1] > maxY){ 
+        maxX = state[i][0];
+        maxY = state[i][1];
+      }
+      if (state[i][0] < minX || state[i][1] < minY){
+        minX = state[i][0];
+        minY = state[i][1];
+      }
+    }
+    return {topRight:[maxX,maxY],bottomLeft:[minX,minY]}
+  }
+};
 
 const printCell = (cell, state) => {};
 
