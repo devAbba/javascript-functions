@@ -1,14 +1,19 @@
-function seed() {return Array.from(arguments);}
+function seed() {
+  console.log('Hello World');
+  return Array.from(arguments);}
 
 function same([x, y], [j, k]) {let a=JSON.stringify(arguments[0]); let b=JSON.stringify(arguments[1]); return (a===b);}
 
 // The game state to search for `cell` is passed as the `this` value of the function.
-function contains(cell) {for(let i=0; i<this.length; i++){
+function contains(cell) {
+  for(let i=0; i<this.length; i++){
   if (same(this[i], cell)) return true;
-}}
+  }
+};
+
 const printCell = (cell, state) => {if (contains.call(state, cell)){return '\u25A3'}; return '\u25A2';};
 
-const corners = (state = []) => {console.log(state);
+const corners = (state = []) => {
   if (state.length==0){ 
     return {topRight:[0,0], bottomLeft:[0,0]};
   }
@@ -31,10 +36,6 @@ const corners = (state = []) => {console.log(state);
     return {topRight:[maxX,maxY],bottomLeft:[minX,minY]}
   }
 };
-
-const printCell = (cell, state) => {};
-
-const corners = (state = []) => {};
 
 const printCells = (state) => {};
 
